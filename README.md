@@ -28,3 +28,12 @@
         "semi": [2, "always"]
       }
     }
+
+## Как использовать
+
+Инструкции как запустить проект:
+
+1. git clone https://github.com/mrOrlando/loftschool-nodejs-homework-1
+2. cd loftschool-nodejs-homework-1
+3. npm install
+4. node index.js inputDirectory outputDerictory [--delete]
