@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "del": "^3.0.0",
+    "mz": "^2.7.0",
     "yargs": "^13.2.0"
   },
   "devDependencies": {

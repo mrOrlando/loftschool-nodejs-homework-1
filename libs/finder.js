@@ -1,12 +1,12 @@
-const fs = require('fs');
+const fs = require('mz/fs');
 const path = require('path');
 
-function finder (base, level = 0, groupsOfFiles = {}) {
-  const files = fs.readdirSync(base);
+async function finder (base, level = 0, groupsOfFiles = {}) {
+  const files = await fs.readdir(base);
 
-  files.forEach(item => {
+  files.forEach(async item => {
     const localBase = path.join(base, item);
-    const state = fs.statSync(localBase);
+    const state = await fs.stat(localBase);
     if (state.isDirectory()) {
       finder(localBase, level + 1, groupsOfFiles);
     } else {

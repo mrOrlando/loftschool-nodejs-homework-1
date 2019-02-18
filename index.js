@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('mz/fs');
 const argv = require('yargs')
   .usage('Usage: $0 inputDirectory outputDirectory [options]')
   .example(
@@ -15,36 +15,38 @@ const argv = require('yargs')
     }
   }).argv;
 
-const copyFiles = require('./src/copyFiles');
-const deleteDir = require('./src/deleteDir');
+const copyFiles = require('./libs/copyFiles');
+const deleteDir = require('./libs/deleteDir');
 
 const [input, output] = argv._;
 
-if (!fs.existsSync(input)) {
-  console.error(`There is no such directory: "${input}"`);
-  console.info('Enter --help command and look at the arguments.');
-  return false;
-}
+(async () => {
+  const isExist = await fs.exists(input);
+  if (!isExist) {
+    console.error(`There is no such directory: "${input}"`);
+    console.info('Enter --help command and look at the arguments.');
+    return false;
+  }
 
-if (!output) {
-  console.error(`Output directory not set!`);
-  console.info('Enter --help command and look at the arguments.');
-  return false;
-}
+  if (!output) {
+    console.error(`Output directory not set!`);
+    console.info('Enter --help command and look at the arguments.');
+    return false;
+  }
 
-// deletes the new folder if it's already created
-deleteDir(output, () => {
+  // deletes the new folder if it's already created
+  await deleteDir(output);
   // creates the new folder
-  fs.mkdirSync(output);
+  await fs.mkdir(output);
   // copies the sorted files there
-  copyFiles(input, output);
+  await copyFiles(input, output);
   // deletes the source directory if necessary
   deleteInputDir();
-});
+})();
 
-function deleteInputDir() {
+async function deleteInputDir () {
   const isDelete = 'delete' in argv && argv.delete === true;
   if (isDelete) {
-    deleteDir(input);
+    await deleteDir(input);
   }
 }
