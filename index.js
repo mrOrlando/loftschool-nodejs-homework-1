@@ -1,12 +1,12 @@
 const fs = require('fs');
-var argv = require('yargs')
+const argv = require('yargs')
   .usage('Usage: $0 inputDirectory outputDirectory [options]')
   .example(
     '$0 inputDirectory outputDirectory',
     'creates the new folder with a name <outputDirectory> and copies there the sorted files from the <inputDirectory> folder.'
   )
-  .help('h')
-  .alias('h', 'help')
+  .help('help')
+  .alias('help', 'h')
   .options({
     delete: {
       alias: 'D',
@@ -22,11 +22,13 @@ const [input, output] = argv._;
 
 if (!fs.existsSync(input)) {
   console.error(`There is no such directory: "${input}"`);
+  console.info('Enter --help command and look at the arguments.');
   return false;
 }
 
 if (!output) {
   console.error(`Output directory not set!`);
+  console.info('Enter --help command and look at the arguments.');
   return false;
 }
 
