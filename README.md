@@ -21,13 +21,31 @@
 
 Файл .eslintrc должен быть следующим:
 
-    {
-      "extends": "standard",
-      "rules": {
-        "no-extra-semi": "error",
-        "semi": [2, "always"]
-      }
-    }
+```json
+{
+  "extends": "standard",
+  "rules": {
+    "no-extra-semi": "error",
+    "semi": [2, "always"]
+  }
+}
+```
+
+## Задача 2
+
+Перепишите первую домашнюю работу с использованием promises или async\await.
+
+Критерии оценивания:
+
+- При реализации использовались promises или async\await
+
+- Функция должна возвращать promise. Пример вызова:
+
+```javascript
+yourFunction(from, to, true).then(function() {
+  console.log('Success');
+});
+```
 
 ## Как использовать
 
