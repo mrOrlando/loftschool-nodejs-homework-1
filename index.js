@@ -1,5 +1,19 @@
 const fs = require('fs');
-const argv = require('minimist')(process.argv.slice(2));
+var argv = require('yargs')
+  .usage('Usage: $0 inputDirectory outputDirectory [options]')
+  .example(
+    '$0 inputDirectory outputDirectory',
+    'creates the new folder with a name <outputDirectory> and copies there the sorted files from the <inputDirectory> folder.'
+  )
+  .help('h')
+  .alias('h', 'help')
+  .options({
+    delete: {
+      alias: 'D',
+      command: 'delete',
+      description: 'deletes the source directory'
+    }
+  }).argv;
 
 const copyFiles = require('./src/copyFiles');
 const deleteDir = require('./src/deleteDir');

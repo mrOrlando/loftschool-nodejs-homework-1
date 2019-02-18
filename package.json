@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "del": "^3.0.0"
+    "del": "^3.0.0",
+    "yargs": "^13.2.0"
   },
   "devDependencies": {
     "eslint": "^5.13.0",
