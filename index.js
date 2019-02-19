@@ -34,14 +34,18 @@ const [input, output] = argv._;
     return false;
   }
 
-  // deletes the new folder if it's already created
-  await deleteDir(output);
-  // creates the new folder
-  await fs.mkdir(output);
-  // copies the sorted files there
-  await copyFiles(input, output);
-  // deletes the source directory if necessary
-  deleteInputDir();
+  try {
+    // deletes the new folder if it's already created
+    await deleteDir(output);
+    // creates the new folder
+    await fs.mkdir(output);
+    // copies the sorted files there
+    await copyFiles(input, output);
+    // deletes the source directory if necessary
+    deleteInputDir();
+  } catch (e) {
+    console.error('error', e);
+  }
 })();
 
 async function deleteInputDir () {
